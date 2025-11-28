@@ -403,3 +403,4 @@ From this point onwards, it's up to you what you want to do. Here are some sugge
 If you've been thinking about starting a developer blog, this project should serve as an excellent foundation for you to build upon. Just be sure to abide by the conditions in the [LICENSE.md file](https://github.com/joy-of-react/project-blog/blob/main/LICENSE.md).
 
 I can't wait to see where you take it!
+# joy-of-react-final-blog
