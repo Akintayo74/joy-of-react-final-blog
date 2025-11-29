@@ -4,7 +4,13 @@ import BlogHero from '@/components/BlogHero';
 
 import styles from './postSlug.module.css';
 
-function BlogPost() {
+import { loadBlogPost } from '@/helpers/file-helpers';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+
+async function BlogPost({ params }) {
+  const { postSlug } = await params;
+  const loadBlog = await loadBlogPost(postSlug);
+
   return (
     <article className={styles.wrapper}>
       <BlogHero
@@ -12,12 +18,7 @@ function BlogPost() {
         publishedOn={new Date()}
       />
       <div className={styles.page}>
-        <p>This is where the blog post will go!</p>
-        <p>
-          You will need to use <em>MDX</em> to render all of
-          the elements created from the blog post in this
-          spot.
-        </p>
+        <MDXRemote source={loadBlog.content} />
       </div>
     </article>
   );
