@@ -6,6 +6,8 @@ import styles from './homepage.module.css';
 
 import { getBlogPostList } from '@/helpers/file-helpers';
 
+
+
 async function Home() {
   const blogList = await getBlogPostList();
   return (
