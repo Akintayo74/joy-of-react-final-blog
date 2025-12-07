@@ -82,7 +82,7 @@ function DivisionGroupsDemo({
             <p className={styles.remainderHeading}>Remainder Area</p>
 
             {range(totalNumInGroups, numOfItems)
-              .reverse()
+              // .reverse()
               .map((index) => {
                 const layoutId = `${id}-${index}`;
                 return (
