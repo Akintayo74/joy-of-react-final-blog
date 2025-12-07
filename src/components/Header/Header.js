@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Rss, Sun, Moon } from "react-feather";
 import Cookies from "js-cookie";
 
-import { LIGHT_COLORS, DARK_COLORS } from "@/constants";
+import { COLOR_THEME_COOKIE_NAME, LIGHT_COLORS, DARK_COLORS } from "@/constants";
 
 import Logo from "@/components/Logo";
 import VisuallyHidden from "@/components/VisuallyHidden";
@@ -18,7 +18,7 @@ function Header({ initialTheme, className, ...delegated }) {
     const nextTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(nextTheme)
 
-    Cookies.set('color-theme', nextTheme, {
+    Cookies.set(COLOR_THEME_COOKIE_NAME, nextTheme, {
       expires: 1000,
     })
 
