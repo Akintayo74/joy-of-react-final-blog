@@ -4,6 +4,8 @@ import clsx from "clsx";
 import { Rss, Sun, Moon } from "react-feather";
 import Cookies from "js-cookie";
 
+import Link from "next/link";
+
 import { COLOR_THEME_COOKIE_NAME, LIGHT_COLORS, DARK_COLORS } from "@/constants";
 
 import Logo from "@/components/Logo";
@@ -37,7 +39,7 @@ function Header({ initialTheme, className, ...delegated }) {
       <Logo />
 
       <div className={styles.actions}>
-        <button className={styles.action}>
+        <a className={styles.action} href='/rss.xml' target='_blank' rel='noopener noreferrer'>
           <Rss
             size="1.5rem"
             style={{
@@ -46,7 +48,7 @@ function Header({ initialTheme, className, ...delegated }) {
             }}
           />
           <VisuallyHidden>View RSS feed</VisuallyHidden>
-        </button>
+        </a>
         <button className={styles.action} onClick={handleClick}>
           {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
 
