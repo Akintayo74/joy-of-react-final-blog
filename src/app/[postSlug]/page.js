@@ -6,13 +6,19 @@ import styles from './postSlug.module.css';
 import { notFound } from 'next/navigation';
 
 import { BLOG_TITLE } from '@/constants';
-import { getBlogPostList, loadBlogPost } from '@/helpers/file-helpers';
+import { loadBlogPost } from '@/helpers/file-helpers';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import BLOG_COMPONENTS from '@/helpers/mdx-component';
 
 export async function generateMetadata({ params }) {
   const { postSlug } = await params;
-  const { frontmatter } = await loadBlogPost(postSlug);
+  const blogPostData = await loadBlogPost(postSlug);
+
+  if(!blogPostData) {
+    return null;
+  }
+
+  const { frontmatter } = blogPostData;
 
   return {
     title: `${frontmatter.title} • ${BLOG_TITLE}`,
@@ -20,26 +26,17 @@ export async function generateMetadata({ params }) {
   }
 }
 
-async function fetchBlog(postSlug) {
-  const response = await getBlogPostList(postSlug);
-
-  if(!response) {
-    return undefined;
-  }
-
-  return response;
-}
-
 async function BlogPost({ params }) {
   const { postSlug } = await params;
-  const blogList = await fetchBlog(postSlug);
+  const blogPostData = await loadBlogPost(postSlug);
 
-  const { frontmatter, content } = await loadBlogPost(postSlug);
-
-  if(!blogList) {
+  
+  if(!blogPostData) {
     notFound();
   }
-
+  
+  const { frontmatter, content } = blogPostData;
+  
   return (
     <article className={styles.wrapper}>
       <BlogHero
